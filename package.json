@@ -2,9 +2,10 @@
   "name": "acm-chat",
   "version": "1.0.0",
   "description": "A basic chat web app using socket.io",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/ritwik0706/ACM-Chat/issues"
   },
-  "homepage": "https://github.com/ritwik0706/ACM-Chat#readme"
+  "homepage": "https://github.com/ritwik0706/ACM-Chat#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.22",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "session": "^0.1.0"
+  }
 }
