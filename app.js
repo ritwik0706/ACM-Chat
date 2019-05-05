@@ -49,10 +49,54 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+//server setup
+var server=require('http').createServer(app);
+
 // Routes
 app.use('/', require('./routes/index'))
 app.use('/users', require('./routes/users'))
+app.use('/public_chat',require('./routes/public_chat'))
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+//for public chat
+connections=[];
+users=[];
+//for public chat
+var io=require('socket.io').listen(server);
+io.sockets.on('connection',function(socket){
+  connections.push(socket);
+  console.log('connected %s sockets connected',connections.length);
+
+  //disconnect
+  socket.on('disconnect',function(data) {
+    // body...
+    users.splice(users.indexOf(socket.username),1);
+    updateUserNames();
+    connections.splice(connections.splice(connections.indexOf(socket),1));
+    console.log('Disconnected %s sockets connected',connections.length);
+  });
+
+  //send message
+  socket.on('send message',function(data){
+    console.log(data);
+    io.sockets.emit('new message',{msg:data});
+  });
+
+  socket.on('new user',function(data,callback){
+    callback(true);
+    socket.username=data;
+    users.push(socket.username);
+    updateUserNames();
+  })
+
+  function updateUserNames(){
+    io.sockets.emit('get users',users);
+  }
+  
+});
 
 const PORT = process.env.PORT || 5000
 
-app.listen(PORT, console.log('Server connected on port '+ PORT))
+server.listen(PORT, console.log('Server connected on port '+ PORT))
