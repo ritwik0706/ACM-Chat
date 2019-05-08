@@ -1,3 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    
+</body>
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= user.name %></p>
+<div class="container">
+    <div class="row">
+        <div class="card col-sm-4 " style="overflow:scroll;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Name</h5>
+                </div>
+                <p>test message</p>
+            </li>
+          </ul>
+        </div>
+
+        
+        <div class="col-sm-8">
+          <div class="chatbody">
+    
+            <table class="table">
+              <tr>
+                <td>message</td>
+                <td>time</td>
+              </tr>
+            </table>
+    
+          </div>
+
+          <div class="row">
+            <div class="col-xs-9">
+              <input type="text" placeholder="Message..." class="form-control" [(ngModel)]="message" />
+            </div>
+            <div class="col-xs-3">
+              <button class="btn btn-info btn-block" (click)="">Send</button>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
+</html>
