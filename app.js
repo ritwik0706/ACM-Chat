@@ -4,8 +4,11 @@ const mongoose = require('mongoose')
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const path = require('path');
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, './views'), { maxAge: 86400000 }));
 
 // Passport Config
 require('./config/passport')(passport);
@@ -52,9 +55,11 @@ app.use(function(req, res, next) {
 
 //server setup
 var server=require('http').createServer(app);
+var io=require('socket.io').listen(server);
 
 // Routes
-app.use('/', require('./routes/index'))
+//app.use('/', require('./routes/index'))
+var index = require('./routes/index')(app, io);
 app.use('/users', require('./routes/users'))
 app.use('/public_chat',require('./routes/public_chat'))
 
@@ -64,7 +69,7 @@ app.use('/public_chat',require('./routes/public_chat'))
 connections=[];
 users=[];
 //for public chat
-var io=require('socket.io').listen(server);
+
 io.sockets.on('connection',function(socket){
   connections.push(socket);
   console.log('connected %s sockets connected',connections.length);
