@@ -5,107 +5,77 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
-<h1 class="mt-4">Dashboard</h1>
+<body>
+    
+<h1 class="mt-4">Chats
+    <a href="/users/logout" class="btn btn-secondary">Logout</a>
+</h1>
 <p class="lead mb-3">Welcome <%= user.name %></p>
 <div class="container">
-    <div class="row">
-        <div class="card col-sm-4 " style="overflow:scroll;">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Name</h5>
-                </div>
-                <p>test message</p>
-            </li>
-          </ul>
-        </div>
-
-        
-        <div class="col-sm-8">
-          <div class="chatbody">
-    
-            <table class="table">
-              <tr>
-                <td>message</td>
-                <td>time</td>
-              </tr>
-            </table>
-    
-          </div>
-
-          <div class="row">
-            <div class="col-xs-9">
-              <input type="text" placeholder="Message..." class="form-control" [(ngModel)]="message" />
-            </div>
-            <div class="col-xs-3">
-              <button class="btn btn-info btn-block" (click)="">Send</button>
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>INBOX</h4>
             </div>
           </div>
+          <div class="inbox_chat">
 
+            <div class="chat_list active_chat" id="community">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="http://www.gingercreek.org/wp-content/uploads/2014/03/small-groups-icon.png" alt="gagan"> </div>
+                <div class="chat_ib">
+                  <h4> Community </h4>
+                </div>
+              </div>
+             </div>
+            
+           <% for(var person of user_list) { %>
+           <% if(person.name != user.name) { %>
+             <ul class="chat_list active_chat" id="users">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="gagan"> </div>
+                <div class="chat_ib">
+                  <h5> <%= person.name %> <span class="chat_date">Dec 25</span></h5>
+                  <p>hey man how are you.</p>
+                </div>
+              </div>
+             </ul>
+            <% } %>
+           <% } %>
+
+          </div>
         </div>
+        <div class="mesgs">
+          <div class="msg_history">
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="gagan"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>hey man how are you.</p>
+                  <span class="time_date"> 11:01 AM    |    June 9</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>fine bro, what about you</p>
+                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+            </div>
+          </div>
+          <div class="type_msg">
+            <div class="input_msg_write">
+              <input type="text" class="write_msg" placeholder="Type a message" />
+              <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>     
     </div>
 </div>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+    <script src="/dash_board.js"></script>
+</body>
 </html>
