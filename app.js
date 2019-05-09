@@ -86,7 +86,7 @@ io.sockets.on('connection',function(socket){
   //send message
   socket.on('send message',function(data){
     console.log(data);
-    io.sockets.emit('new message',{msg:data});
+    io.sockets.emit('new message',data);
   });
 
   socket.on('new user',function(data,callback){

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
+
 <body>
-    
-<h1 class="mt-4">Chats
+
+  <h1 class="mt-4">Chats
     <a href="/users/logout" class="btn btn-secondary">Logout</a>
-</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<div class="container">
-<div class="messaging">
+  </h1>
+  <p class="lead mb-3" id="user">Welcome <%= user.name %></p>
+  <div class="container">
+    <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
           <div class="headind_srch">
@@ -27,16 +30,18 @@
 
             <div class="chat_list active_chat" id="community">
               <div class="chat_people">
-                <div class="chat_img"> <img src="http://www.gingercreek.org/wp-content/uploads/2014/03/small-groups-icon.png" alt="gagan"> </div>
+                <div class="chat_img"> <img
+                    src="http://www.gingercreek.org/wp-content/uploads/2014/03/small-groups-icon.png" alt="gagan">
+                </div>
                 <div class="chat_ib">
                   <h4> Community </h4>
                 </div>
               </div>
-             </div>
-            
-           <% for(var person of user_list) { %>
-           <% if(person.name != user.name) { %>
-             <ul class="chat_list active_chat" id="users">
+            </div>
+
+            <% for(var person of user_list) { %>
+            <% if(person.name != user.name) { %>
+            <ul class="chat_list active_chat" id="users">
               <div class="chat_people">
                 <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="gagan"> </div>
                 <div class="chat_ib">
@@ -44,38 +49,68 @@
                   <p>hey man how are you.</p>
                 </div>
               </div>
-             </ul>
+            </ul>
             <% } %>
-           <% } %>
+            <% } %>
 
           </div>
         </div>
         <div class="mesgs">
           <div class="msg_history">
-            <div class="incoming_msg">
+            <!-- <div class="incoming_msg">
               <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="gagan"> </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
                   <p>hey man how are you.</p>
                   <span class="time_date"> 11:01 AM    |    June 9</span></div>
               </div>
-            </div>
+            </div> -->
             <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>fine bro, what about you</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+              <div class="sent_msg" id="output">
+              </div>
             </div>
           </div>
-          <div class="type_msg">
-            <div class="input_msg_write">
-              <input type="text" class="write_msg" placeholder="Type a message" />
-              <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+          <form id="messageForm">
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <input id="message" type="text" class="write_msg" placeholder="Type a message" />
+                <button id="send" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                    aria-hidden="true"></i></button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
-      </div>     
+      </div>
     </div>
-</div>
-    <script src="/dash_board.js"></script>
+  </div>
+  <!-- <script src="/dash_board.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+    $(function () {
+      var socket = io.connect();
+      var $message = $('#message');
+      var $btn = $('#send');
+      var $output = $('#output');
+
+      $(document).ready(function () {
+        var x = <%-JSON.stringify(user) %>;
+        alert(x.name);  // now JS variable 'x' has the uid that's passed from the node backend.
+
+        $btn.click(function (e) {
+          socket.emit('send message', {
+            message: $message.val(),
+            handle: x.name
+          });
+          $message.val('');
+        })
+      });
+
+      socket.on('new message', function (data) {
+        output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>'
+      });
+
+    });
+  </script>
 </body>
+
 </html>
