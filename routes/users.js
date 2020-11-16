@@ -17,6 +17,12 @@ router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body;
   let errors = [];
 
+  var domain = email.substr(email.length-10, 10);
+
+  if(domain!="iitr.ac.in") {
+    errors.push({msg : 'You do not have the access. Please try with your Institute Email Id.'})
+  }
+
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
@@ -79,7 +85,7 @@ router.post('/register', (req, res) => {
 // Login
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/public_chat',
     failureRedirect: '/users/login',
     failureFlash: true
   })(req, res, next);
