@@ -20,19 +20,19 @@ router.post('/register', (req, res) => {
   var domain = email.substr(email.length-10, 10);
 
   if(domain!="iitr.ac.in") {
-    errors.push({msg : 'You do not have the access. Please try with your Institute Email Id.'})
+    errors.push({msg : 'You do not have the access. Please try with your Institute Email Id.'});
   }
 
   if (!name || !email || !password || !password2) {
-    errors.push({ msg: 'Please enter all fields' });
+    errors.push({ msg: 'Please enter all fields.' });
   }
 
   if (password != password2) {
-    errors.push({ msg: 'Passwords do not match' });
+    errors.push({ msg: 'Passwords do not match.' });
   }
 
   if (password.length < 6) {
-    errors.push({ msg: 'Password must be at least 6 characters' });
+    errors.push({ msg: 'Password must be at least 6 characters.' });
   }
 
   if (errors.length > 0) {
