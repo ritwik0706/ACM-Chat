@@ -80,7 +80,7 @@ io.sockets.on('connection',function(socket){
     users.splice(users.indexOf(socket.username),1);
     updateUserNames();
     connections.splice(connections.splice(connections.indexOf(socket),1));
-    console.log('Disconnected %s sockets connected',connections.length);
+    console.log('Disconnected, %s sockets connected',connections.length);
   });
 
   //send message

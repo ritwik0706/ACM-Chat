@@ -21,7 +21,7 @@
 		
 		<div class="col-md-4">
 				<div class="well">	
-					<h3>Online Users</h3>
+					<h3>Welcome <%= user.name %></h3>
 					<ul class="list-group" id="users"></ul>
 				</div>	
 		</div>
@@ -48,12 +48,12 @@
 			
 			$messageForm.submit(function(e){
 				e.preventDefault();
-				socket.emit('send message',$message.val());
+				socket.emit('send message', '<%=user.name%> : ' +  $message.val());
 				$message.val('');
 				//console.log('Submitted');
 			});
 			socket.on('new message',function(data){
-				$chat.append('<div class="well">'+data.msg+'<div>')
+				$chat.append('<div class="well">' +data.msg+'<div>')
 			})
 			socket.emit('new user',user.name,function(data){});
 			socket.on('get users',function(data){

@@ -13,7 +13,7 @@ router.get('/',ensureAuthenticated,function(req,res){
 
 io.sockets.on('connection',function(socket){
 	connections.push(socket);
-	console.log('connected %s sockets connected',connections.length);
+	console.log('connected %s sockets', connections.length);
 });
 
 module.exports=router;
